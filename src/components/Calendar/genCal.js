@@ -20,12 +20,14 @@ function genCal({language, startMonth, startYear}) {
   const lastMonthName = MONTH_NAMES[language][mm === 0 ? 11 : mm - 1];
   for (let i = firstDay + 1; i > 1; i--) {
     const ndt = new Date(zero.valueOf() - nDays(i));
-    days.push({ n: ndt.getDate(), month: lastMonthName });
+    console.log(ndt)
+    days.push({ n: ndt.getDate(), month: lastMonthName, day: (ndt.getDay() + 1) % 7});
   }
 
   // this month.
   for (let i = 0; i < lastDay.getDate(); i++) {
-    days.push({ month, n: i });
+    const ndt = new Date(zero.valueOf() + nDays(i));
+    days.push({ month, n: i,  day: ndt.getDay()  });
   }
   // next month ?
   const nextMonthName =
@@ -33,7 +35,8 @@ function genCal({language, startMonth, startYear}) {
       mm === 11 ? 0 : mm + 1
     ];
   for (let i= 0; i < days.length % 7; i++){
-    days.push({month: nextMonthName, n: i })
+    const ndt = new Date(nextMonth.valueOf() + nDays(i));
+    days.push({month: nextMonthName, n: i, day: ndt.getDay() })
   }
 
   // calendar page

@@ -9,7 +9,9 @@ const Month = ({ settings, startMonth, startYear }) => {
     month: "",
     year: undefined,
     selectDay: undefined,
-    selectMonth: undefined
+    selectMonth: undefined,
+    abbrv: true,
+    weekDay: undefined
   });
   useEffect(() => {
     const { month, days, year } = genCal({
@@ -17,13 +19,19 @@ const Month = ({ settings, startMonth, startYear }) => {
       startMonth,
       startYear
     });
-    setState({ days, month, year });
-  }, [settings.language, startMonth, startYear]);
+    setState({ abbrv: state.abbrv, days, month, year });
+  }, [settings.language, startMonth, startYear, state.abbrv]);
   const overView = ({ month: selectMonth, n: selectDay }) => {
     setState({ ...state, selectDay, selectMonth });
   };
   const today = new Date(Date.now());
   const year = startYear || today.getFullYear();
+  const handleMouseOver = (n) => {
+    setState({ ...state, weekDay: n });
+  };
+  const toggleNameView = (n) => {
+    setState({...state, weekDay: DAY_NAMES["en"][n]})
+  }
   return (
     <div className="div-month">
       <div className="cal-year">
@@ -35,18 +43,25 @@ const Month = ({ settings, startMonth, startYear }) => {
       <div className="dash-grid-headers">
         {DAY_NAMES[settings.language].map((n) => (
           <div className="div-week-name">
-            <h4>{n}</h4>
+            <h4
+              onMouseEnter={() => handleMouseOver(n)}
+              onMouseLeave={() => handleMouseOver(undefined)}
+            >
+              {state.weekDay !== n ? n[0] : n}
+            </h4>
           </div>
         ))}
       </div>
       <div className="dash-grid-container">
-        {state.days.map(({ n, month }, i) => (
+        {state.days.map(({ n, month, day:toggle }, i) => (
           <Day
             other={month !== state.month}
             month={month}
             today={today.getDate() === 1 + n && year === state.year}
             key={i}
             n={(n % 31) + 1}
+            toggle={toggle}
+            toggleNameView={(val) => val === -1 ? toggleNameView(undefined) : toggleNameView(toggle)}
             showEvents={() => overView({ month, n: n + 1 })}
           />
         ))}

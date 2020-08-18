@@ -32,14 +32,14 @@
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: 1fr;
   grid-template-areas: ". . . . . . .";
+  /* width: 11vw; */
+
 }
 .div-week-name {
   /* border: 1px solid snow; */
-  padding-left: 1ch;
-  padding-right: 1ch;
-  margin-top: -1.5ch;
-  margin-bottom: -1ch;
-  width: 9vw;
+  /* padding-left: 1ch;
+  padding-right: 1ch; */
+  width: 11vw;
   /* height: 2.2ch; */
   color: #fdcb9e;
   text-align: center;
