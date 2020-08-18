@@ -13,7 +13,7 @@ function genCal({language, startMonth, startYear}) {
   const zero = new Date(`${month} 1, ${year}`);
   const firstDay = zero.getDay(); // day of week
   const nextMonth = new Date(`${MONTH_NAMES[language][mm === 11 ? 0 : mm + 1]} 1, ${year}`);
-  console.log('next Month', nextMonth.getMonth())
+  // console.log('next Month', nextMonth.getMonth())
   const lastDay = new Date(nextMonth.valueOf() - nDays(1));
 
   // last month ?

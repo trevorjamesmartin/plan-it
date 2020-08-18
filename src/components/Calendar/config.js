@@ -60,7 +60,7 @@ export const MODAL_STYLES_2 = {
   maxWidth: `500px`,
   height: `60vh`,
   zIndex: 1000,
-  borderRadius: "1ch",
+  // borderRadius: "1ch",
   display: 'flex',
   flexFlow: 'column'
 
