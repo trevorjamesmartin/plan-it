@@ -41,7 +41,7 @@ const Dash = () => {
   };
   const getEvents = ({ yyyy, mm, dd }) => {
     // return events occurring on yyyy-mm-dd
-    return ["ok", "ok"];
+    return ["event 1 ", "event 2"];
   };
   const setEvent = ({ event, key: { yyyy, mm, dd, hhmmss } }) => {
     // details are displayed in "day-view-body" class
