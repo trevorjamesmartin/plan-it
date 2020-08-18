@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Day, { DayView } from "./Day";
 import genCal from "./genCal";
-import { DAY_NAMES, defaultMonthState } from "./config";
+import { DAY_NAMES, MONTH_NAMES, defaultMonthState } from "./config";
 
-const Month = ({ settings, startMonth, startYear }) => {
+const Month = ({ settings, startMonth, startYear, functions }) => {
   const [state, setState] = useState(defaultMonthState);
   useEffect(() => {
     const { month, days, year } = genCal({
@@ -13,8 +13,20 @@ const Month = ({ settings, startMonth, startYear }) => {
     });
     setState({ abbrv: state.abbrv, days, month, year });
   }, [settings.language, startMonth, startYear, state.abbrv]);
-  const overView = ({ month: selectMonth, n: selectDay, day: selectWeekDay }) => {
-    setState({ ...state, selectDay, selectMonth, selectWeekDay });
+  const overView = ({
+    month: selectMonth,
+    n: selectDay,
+    day: selectWeekDay
+  }) => {
+    const key = {
+      yyyy: state.year,
+      mm: MONTH_NAMES["en"].indexOf(selectMonth) + 1,
+      dd: selectDay
+    };
+    console.log(key);
+    const { yyyy, mm, dd } = key;
+    const events = functions.getEvents({ yyyy, mm, dd }); // get events for this day.
+    setState({ ...state, selectDay, selectMonth, selectWeekDay, events });
   };
   const today = new Date(Date.now());
   const year = startYear || today.getFullYear();
@@ -22,8 +34,8 @@ const Month = ({ settings, startMonth, startYear }) => {
     setState({ ...state, weekDay: n });
   };
   const toggleNameView = (n) => {
-    setState({...state, weekDay: DAY_NAMES["en"][n]})
-  }
+    setState({ ...state, weekDay: DAY_NAMES["en"][n] });
+  };
   return (
     <div className="div-month">
       <div className="cal-year">
@@ -45,7 +57,7 @@ const Month = ({ settings, startMonth, startYear }) => {
         ))}
       </div>
       <div className="dash-grid-container">
-        {state.days.map(({ n, month, day:toggle }, i) => (
+        {state.days.map(({ n, month, day: toggle }, i) => (
           <Day
             other={month !== state.month}
             month={month}
@@ -53,7 +65,9 @@ const Month = ({ settings, startMonth, startYear }) => {
             key={i}
             n={(n % 31) + 1}
             toggle={toggle}
-            toggleNameView={(val) => val === -1 ? toggleNameView(undefined) : toggleNameView(toggle)}
+            toggleNameView={(val) =>
+              val === -1 ? toggleNameView(undefined) : toggleNameView(toggle)
+            }
             showEvents={() => overView({ month, n: n + 1, day: toggle })}
           />
         ))}
@@ -68,10 +82,15 @@ const Month = ({ settings, startMonth, startYear }) => {
       >
         {state.selectDay ? (
           <>
-          <p>list of events for {state.selectMonth}-{state.selectDay}-{state.year}...</p>
-          <p>(from your resource)</p>
+            <p>
+              list of events for {state.selectMonth}-{state.selectDay}-
+              {state.year}...
+            </p>
+        {state.events ? state.events.map(ev=> <p className="p-event">{ev}</p>) : "events go here."}
           </>
-        ) : ""}
+        ) : (
+          ""
+        )}
       </DayView>
     </div>
   );

@@ -102,3 +102,17 @@
 .cal-year h4 {
   margin-bottom: -1ch;
 }
+
+.p-event {
+  padding: 1ch;
+  background-color: #fdcb9e;
+  color: #1b262c;
+  border: 1px solid #fdcb9e;
+}
+
+.p-event-hover {
+  padding: 1ch;
+  background-color: #fdcb9e;
+  color: #1b262c;
+  border: 1px solid #1b262c;
+}

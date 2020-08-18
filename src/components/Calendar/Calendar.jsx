@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Month from "./Month";
 
-const Calendar = ({ state: settings }) => {
+const Calendar = ({ state: settings, functions }) => {
   const [state, setState] = useState({
     year: undefined,
     month: undefined
@@ -27,7 +27,7 @@ const Calendar = ({ state: settings }) => {
   return (
     <>
       <div className="div-calendar">
-        <Month settings={settings} startMonth={state.month} startYear={state.year}  />
+        <Month settings={settings} startMonth={state.month} startYear={state.year} functions={functions} />
       </div>
       <span>
         <button onClick={pageLast}>{"<"}</button>
