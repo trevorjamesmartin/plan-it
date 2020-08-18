@@ -41,8 +41,8 @@ const Month = ({ settings, startMonth, startYear }) => {
         <h1>{state.month}</h1>
       </div>
       <div className="dash-grid-headers">
-        {DAY_NAMES[settings.language].map((n) => (
-          <div className="div-week-name">
+        {DAY_NAMES[settings.language].map((n, k) => (
+          <div key={k} className="div-week-name">
             <h4
               onMouseEnter={() => handleMouseOver(n)}
               onMouseLeave={() => handleMouseOver(undefined)}
