@@ -2,17 +2,19 @@ import React, { useState, useEffect } from "react";
 import ReactDom from "react-dom";
 import { OVERLAY_STYLES_2, MODAL_STYLES_2 } from "./config";
 
-export const DayView = ({month, day, open, close,...props}) => {
+export const DayView = ({ year, month, day, weekday, open, close, ...props }) => {
   if (!open) return null;
 
   return ReactDom.createPortal(
     <>
       <div style={OVERLAY_STYLES_2} />
       <div className="day-view" style={MODAL_STYLES_2}>
-      <div className="day-view-header">
-        <h2>{month} {day}</h2>
-        <button onClick={close}>X</button>
-      </div>
+        <div className="day-view-header">
+          <p>
+            {weekday} {month} {day}, {year}
+          </p>
+          <button onClick={close}>X</button>
+        </div>
       </div>
     </>,
     document.getElementById("portal")
@@ -21,25 +23,25 @@ export const DayView = ({month, day, open, close,...props}) => {
 
 const Day = ({ n, month, other, today, toggle, toggleNameView, ...props }) => {
   const [cls, setCls] = useState(other ? "div-day-other" : "div-day");
-  useEffect(()=>{
-    setCls(other ? "div-day-other" : "div-day")
-  }, [other])
+  useEffect(() => {
+    setCls(other ? "div-day-other" : "div-day");
+  }, [other]);
   return (
     <div
       className={cls}
       onMouseEnter={() => {
-        setCls("div-day-hover")
-        toggleNameView()
+        setCls("div-day-hover");
+        toggleNameView();
       }}
       onMouseLeave={() => {
-        toggleNameView(-1)
-        setCls(other ? "div-day-other" : "div-day")
+        toggleNameView(-1);
+        setCls(other ? "div-day-other" : "div-day");
       }}
       onClick={() => props.showEvents(n)}
       name={n}
       month={month}
     >
-      {today ? `${n}*`:n}
+      {today ? `${n}*` : n}
     </div>
   );
 };

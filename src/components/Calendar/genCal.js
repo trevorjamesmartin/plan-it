@@ -34,7 +34,8 @@ function genCal({language, startMonth, startYear}) {
     MONTH_NAMES[language][
       mm === 11 ? 0 : mm + 1
     ];
-  for (let i= 0; i < days.length % 7; i++){
+  const daysLeft = 42 - days.length;
+  for (let i= 0; i < daysLeft; i++){
     const ndt = new Date(nextMonth.valueOf() + nDays(i));
     days.push({month: nextMonthName, n: i, day: ndt.getDay() })
   }

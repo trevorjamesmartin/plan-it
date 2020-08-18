@@ -10,6 +10,7 @@ const Month = ({ settings, startMonth, startYear }) => {
     year: undefined,
     selectDay: undefined,
     selectMonth: undefined,
+    selectWeekDay: undefined,
     abbrv: true,
     weekDay: undefined
   });
@@ -21,8 +22,8 @@ const Month = ({ settings, startMonth, startYear }) => {
     });
     setState({ abbrv: state.abbrv, days, month, year });
   }, [settings.language, startMonth, startYear, state.abbrv]);
-  const overView = ({ month: selectMonth, n: selectDay }) => {
-    setState({ ...state, selectDay, selectMonth });
+  const overView = ({ month: selectMonth, n: selectDay, day: selectWeekDay }) => {
+    setState({ ...state, selectDay, selectMonth, selectWeekDay });
   };
   const today = new Date(Date.now());
   const year = startYear || today.getFullYear();
@@ -62,7 +63,7 @@ const Month = ({ settings, startMonth, startYear }) => {
             n={(n % 31) + 1}
             toggle={toggle}
             toggleNameView={(val) => val === -1 ? toggleNameView(undefined) : toggleNameView(toggle)}
-            showEvents={() => overView({ month, n: n + 1 })}
+            showEvents={() => overView({ month, n: n + 1, day: toggle })}
           />
         ))}
       </div>
@@ -71,6 +72,8 @@ const Month = ({ settings, startMonth, startYear }) => {
         close={() => setState({ ...state, selectDay: undefined })}
         month={state.selectMonth}
         day={state.selectDay}
+        weekday={DAY_NAMES[settings.language][state.selectWeekDay]}
+        year={state.year}
       />
     </div>
   );

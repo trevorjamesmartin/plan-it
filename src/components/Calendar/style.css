@@ -86,6 +86,10 @@
   align-items: center;
 }
 
+.day-view-header p {
+  font-style: italic;
+}
+
 .cal-month, .cal-day, .cal-year {
   color: #fdcb9e;
 }
