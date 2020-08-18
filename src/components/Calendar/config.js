@@ -58,7 +58,7 @@ export const MODAL_STYLES_2 = {
   padding: `1ch`,
   width: `90vw`,
   maxWidth: `500px`,
-  height: `60vh`,
+  height: `90vh`,
   zIndex: 1000,
   // borderRadius: "1ch",
   display: 'flex',
