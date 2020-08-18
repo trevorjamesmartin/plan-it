@@ -1,0 +1,74 @@
+.div-login {
+  display: flex;
+  flex-flow: column;
+}
+
+.input-login {
+  padding: 1ch;
+  margin-bottom: 1ch;
+  text-align: center;
+}
+
+.btn-login {
+  padding: 1ch;
+}
+
+.div-dash {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  height: 100vh;
+}
+
+.dash-grid-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 1px 1px;
+  grid-template-areas: ". . . . . . ." ". . . . . . ." ". . . . . . ." ". . . . . . .";
+}
+
+.div-day {
+  background-color: snow;
+  border: 1px solid snow;
+  padding: 1ch;
+  width: 9vw;
+  height: 9vw;
+}
+.div-day-other {
+  background-color: snow;
+  border: 1px solid snow;
+  padding: 1ch;
+  width: 9vw;
+  height: 9vw;
+  opacity: 80%;
+}
+.div-day-hover {
+  background-color: #00b7c2;
+  border: 1px solid #00b7c2;
+  padding: 1ch;
+  width: 9vw;
+  height: 9vw;
+}
+
+.div-calendar {
+  margin-top: 25px;
+}
+
+.div-month {
+  background-color: #1b262c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 2px;
+}
+
+.day-view-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  color: #fdcb9e;
+}
