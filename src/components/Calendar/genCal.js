@@ -5,15 +5,15 @@ function genCal({language, startMonth, startYear}) {
   const days = [];
   
   // determine month & year
-  const dt = new Date(Date.now());
-  const mm = startMonth !== undefined ? startMonth : dt.getMonth();
-  const year = startYear || dt.getFullYear();
+  const mm = startMonth;
+  const year = startYear;
   const month = MONTH_NAMES[language][mm];
 
   // derive zero-day from day 1 of month, year
   const zero = new Date(`${month} 1, ${year}`);
   const firstDay = zero.getDay(); // day of week
-  const nextMonth = new Date(`${month + 1} 1, ${year}`);
+  const nextMonth = new Date(`${MONTH_NAMES[language][mm === 11 ? 0 : mm + 1]} 1, ${year}`);
+  console.log('next Month', nextMonth.getMonth())
   const lastDay = new Date(nextMonth.valueOf() - nDays(1));
 
   // last month ?
