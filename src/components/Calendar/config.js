@@ -65,3 +65,14 @@ export const MODAL_STYLES_2 = {
   flexFlow: 'column'
 
 };
+
+export const defaultMonthState = {
+  days: [],
+  month: "",
+  year: undefined,
+  selectDay: undefined,
+  selectMonth: undefined,
+  selectWeekDay: undefined,
+  abbrv: true,
+  weekDay: undefined
+}

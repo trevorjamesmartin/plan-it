@@ -89,7 +89,12 @@
 .day-view-header p {
   font-style: italic;
 }
-
+.day-view-body div {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
 .cal-month, .cal-day, .cal-year {
   color: #fdcb9e;
 }

@@ -15,6 +15,10 @@ export const DayView = ({ year, month, day, weekday, open, close, ...props }) =>
           </p>
           <button onClick={close}>X</button>
         </div>
+        <br />
+        <div className="day-view-body">
+          {props.children}
+        </div>
       </div>
     </>,
     document.getElementById("portal")

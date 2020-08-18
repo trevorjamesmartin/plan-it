@@ -1,19 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Day, { DayView } from "./Day";
 import genCal from "./genCal";
-import { DAY_NAMES } from "./config";
+import { DAY_NAMES, defaultMonthState } from "./config";
 
 const Month = ({ settings, startMonth, startYear }) => {
-  const [state, setState] = useState({
-    days: [],
-    month: "",
-    year: undefined,
-    selectDay: undefined,
-    selectMonth: undefined,
-    selectWeekDay: undefined,
-    abbrv: true,
-    weekDay: undefined
-  });
+  const [state, setState] = useState(defaultMonthState);
   useEffect(() => {
     const { month, days, year } = genCal({
       language: settings.language,
@@ -74,7 +65,14 @@ const Month = ({ settings, startMonth, startYear }) => {
         day={state.selectDay}
         weekday={DAY_NAMES[settings.language][state.selectWeekDay]}
         year={state.year}
-      />
+      >
+        {state.selectDay ? (
+          <>
+          <p>list of events for {state.selectMonth}-{state.selectDay}-{state.year}...</p>
+          <p>(from your resource)</p>
+          </>
+        ) : ""}
+      </DayView>
     </div>
   );
 };
