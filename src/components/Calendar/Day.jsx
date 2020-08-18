@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDom from "react-dom";
 import { OVERLAY_STYLES_2, MODAL_STYLES_2 } from "./config";
 
@@ -21,6 +21,9 @@ export const DayView = ({month, day, open, close, ...props}) => {
 
 const Day = ({ n, month, other, today,...props }) => {
   const [cls, setCls] = useState(other ? "div-day-other" : "div-day");
+  useEffect(()=>{
+    setCls(other ? "div-day-other" : "div-day")
+  }, [other])
   return (
     <div
       className={cls}
