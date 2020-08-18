@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Day, { DayView } from "./Day";
 import genCal from "./genCal";
+import { DAY_NAMES } from "./config";
 
 const Month = ({ settings, startMonth, startYear }) => {
   const [state, setState] = useState({
@@ -11,7 +12,11 @@ const Month = ({ settings, startMonth, startYear }) => {
     selectMonth: undefined
   });
   useEffect(() => {
-    const { month, days, year } = genCal({ language: settings.language, startMonth, startYear });
+    const { month, days, year } = genCal({
+      language: settings.language,
+      startMonth,
+      startYear
+    });
     setState({ days, month, year });
   }, [settings.language, startMonth, startYear]);
   const overView = ({ month: selectMonth, n: selectDay }) => {
@@ -21,7 +26,19 @@ const Month = ({ settings, startMonth, startYear }) => {
   const year = startYear || today.getFullYear();
   return (
     <div className="div-month">
-      <h1>{state.month}</h1>
+      <div className="cal-year">
+        <h4>{state.year}</h4>
+      </div>
+      <div className="cal-month">
+        <h1>{state.month}</h1>
+      </div>
+      <div className="dash-grid-headers">
+        {DAY_NAMES[settings.language].map((n) => (
+          <div className="div-week-name">
+            <h4>{n}</h4>
+          </div>
+        ))}
+      </div>
       <div className="dash-grid-container">
         {state.days.map(({ n, month }, i) => (
           <Day
