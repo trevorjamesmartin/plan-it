@@ -20,7 +20,7 @@ function genCal({language, startMonth, startYear}) {
   const lastMonthName = MONTH_NAMES[language][mm === 0 ? 11 : mm - 1];
   for (let i = firstDay + 1; i > 1; i--) {
     const ndt = new Date(zero.valueOf() - nDays(i));
-    console.log(ndt)
+    // console.log(ndt)
     days.push({ n: ndt.getDate(), month: lastMonthName, day: (ndt.getDay() + 1) % 7});
   }
 
