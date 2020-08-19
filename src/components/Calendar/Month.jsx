@@ -3,7 +3,14 @@ import Day, { DayView } from "./Day";
 import genCal from "./genCal";
 import { DAY_NAMES, MONTH_NAMES, defaultMonthState } from "./config";
 
-const Month = ({ settings, startMonth, startYear, functions }) => {
+const Month = ({
+  pageLast,
+  pageNext,
+  settings,
+  startMonth,
+  startYear,
+  functions
+}) => {
   const [state, setState] = useState(defaultMonthState);
   useEffect(() => {
     const { month, days, year } = genCal({
@@ -42,7 +49,15 @@ const Month = ({ settings, startMonth, startYear, functions }) => {
         <h4>{state.year}</h4>
       </div>
       <div className="cal-month">
-        <h1>{state.month}</h1>
+        <span style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <button className="btn-month" onClick={pageLast}>{"<"}</button>
+
+          <div style={{ width: "25ch", textAlign: "center" }}>
+            <h1>{state.month}</h1>
+          </div>
+
+          <button className="btn-month" onClick={pageNext}>{">"}</button>
+        </span>
       </div>
       <div className="dash-grid-headers">
         {DAY_NAMES[settings.language].map((n, k) => (
@@ -86,7 +101,9 @@ const Month = ({ settings, startMonth, startYear, functions }) => {
               list of events for {state.selectMonth}-{state.selectDay}-
               {state.year}...
             </p>
-        {state.events ? state.events.map(ev=> <p className="p-event">{ev}</p>) : "events go here."}
+            {state.events
+              ? state.events.map((ev) => <p className="p-event">{ev}</p>)
+              : "events go here."}
           </>
         ) : (
           ""
