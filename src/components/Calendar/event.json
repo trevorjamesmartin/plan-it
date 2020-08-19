@@ -1,0 +1,59 @@
+{
+  "kind": "calendar#event",
+  "id": "",
+  "status": "",
+  "htmlLink": "",
+  "created": "datetime",
+  "updated": "datetime",
+  "summary": "",
+  "description": "",
+  "location": "",
+  "colorId": "",
+  "start": {
+    "date": "date",
+    "datetime": "datetime",
+    "timeZone": ""
+  },
+  "end": {
+    "date": "date",
+    "datetime": "datetime",
+    "timeZone": ""
+  },
+  "endTimeUnspecified": true,
+  "recurrence": [
+    ""
+  ],
+  "recurringEventId": "",
+  "originalStartTime": {
+    "date": "date",
+    "datetime": "datetime",
+    "timeZone": ""
+  },
+  "attendees": [
+    {
+      "id": "",
+      "email": "",
+      "displayName": "",
+      "organizer": true,
+      "self": true,
+      "resource": false,
+      "optional": false,
+      "responseStatus": "",
+      "comment": "",
+      "additionalGuests": 0
+    }
+  ],
+  "source": {
+    "url": "",
+    "title": ""
+  },
+  "attachments": [
+    {
+      "fileUrl": "",
+      "title": "",
+      "mimeType": "",
+      "iconLink": "",
+      "fileId": ""
+    }
+  ]
+}

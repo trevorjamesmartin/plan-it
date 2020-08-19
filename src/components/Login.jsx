@@ -1,20 +1,23 @@
-import React, {useEffect, useRef} from 'react';
-import ReactDom from 'react-dom';
-import {MODAL_STYLES, OVERLAY_STYLES} from './Calendar/config';
+import React, { useEffect, useRef } from "react";
+import ReactDom from "react-dom";
+import { MODAL_STYLES, OVERLAY_STYLES } from "./Calendar/config";
 
 const Login = ({ open, email, password, updateToken, toggle, start }) => {
   const emailRef = useRef();
   const btnRef = useRef();
+
   useEffect(() => {
     open && emailRef.current.focus();
   }, [open]);
+
   if (!open) return null;
+  
   const onKeyUp = (e) => {
     if (e.charCode === 13) {
       btnRef.current.click();
     }
   };
-
+  
   return ReactDom.createPortal(
     <>
       <div style={OVERLAY_STYLES} />

@@ -45,7 +45,7 @@ const Day = ({ n, month, other, today, toggle, toggleNameView, ...props }) => {
       name={n}
       month={month}
     >
-      {today ? `${n}*` : n}
+      <p className="p-day-number">{today ? `${n}*` : n}</p>
     </div>
   );
 };

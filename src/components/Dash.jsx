@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Login from "./Login";
-
+import { verifiedUser } from "./AuthCallback";
 import Calendar from "./Calendar"; // display
-import {getEvent, getEvents, setEvent} from "./calendarIO"; // data
+import { getEvent, getEvents, setEvent } from "./calendarIO"; // io
 
 import "./Calendar/style.css";
 // import {userBase} from "./Calendar/config"
@@ -15,11 +15,11 @@ function removeKey(keyname, state) {
   return [value, nextState];
 }
 
-const Dash = () => {
+const Dash = ({ state: appState, setState: setAppState }) => {
   const [state, setState] = useState({
     email: "",
     password: "",
-    toggle: false,
+    toggle: verifiedUser(appState),
     language: "en"
   });
   const updateToken = (e) => {

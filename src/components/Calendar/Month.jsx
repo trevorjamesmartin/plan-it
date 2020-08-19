@@ -30,7 +30,7 @@ const Month = ({
       mm: MONTH_NAMES["en"].indexOf(selectMonth) + 1,
       dd: selectDay
     };
-    console.log(key);
+    // console.log(key);
     const { yyyy, mm, dd } = key;
     const events = functions.getEvents({ yyyy, mm, dd }); // get events for this day.
     setState({ ...state, selectDay, selectMonth, selectWeekDay, events });
@@ -46,14 +46,14 @@ const Month = ({
   return (
     <div className="div-month">
       <div className="cal-year">
-        <h4>{state.year}</h4>
+        <h4 className="h4-year" >{state.year}</h4>
       </div>
       <div className="cal-month">
         <span style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <button className="btn-month" onClick={pageLast}>{"<"}</button>
 
           <div style={{ width: "25ch", textAlign: "center" }}>
-            <h1>{state.month}</h1>
+            <h1 className="h1-month">{state.month}</h1>
           </div>
 
           <button className="btn-month" onClick={pageNext}>{">"}</button>
@@ -63,6 +63,7 @@ const Month = ({
         {DAY_NAMES[settings.language].map((n, k) => (
           <div key={k} className="div-week-name">
             <h4
+              className="h4-week-name"
               onMouseEnter={() => handleMouseOver(n)}
               onMouseLeave={() => handleMouseOver(undefined)}
             >
@@ -102,8 +103,8 @@ const Month = ({
               {state.year}...
             </p>
             {state.events
-              ? state.events.map((ev) => <p className="p-event">{ev}</p>)
-              : "events go here."}
+              ? state.events.map((ev, i) => <p className="p-event" key={i} >{ev.start.datetime} ∙ {ev.summary}</p>)
+              : "daily events go here."}
           </>
         ) : (
           ""
