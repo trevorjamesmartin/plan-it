@@ -35,7 +35,8 @@ const Dash = ({ state: appState, setState: setAppState }) => {
 
   return (
     <div className="div-dash">
-      <Calendar state={state} functions={{ getEvents, getEvent, setEvent }} />
+      <br />
+      <Calendar className="calendar-component" state={state} functions={{ getEvents, getEvent, setEvent }} />
       <Login
         email={state.email}
         password={state.password}
