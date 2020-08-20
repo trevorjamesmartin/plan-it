@@ -36,6 +36,7 @@
   /* width: 11vw; */
 
 }
+
 .div-week-name {
   /* border: 1px solid snow; */
   padding-left: 1ch;
@@ -46,12 +47,13 @@
   text-align: center;
   
 }
-.h4-week-name {
+
+.text-week-name {
   font-family: 'Open Sans', sans-serif;
   font-weight: 100;
-  font-size: smaller;
+  font-size: .77rem;
+  margin-bottom: 1ch;
 }
-
 .div-day {
   background-color: snow;
   border: 1px solid snow;
@@ -141,7 +143,10 @@
   margin-bottom: 5px;
 }
 
-.h4-year {
+.text-year {
   font-family: 'Open Sans', sans-serif;
-  font-size: .7rem
+  font-size: .77rem;
+  font-weight: 100;
+  margin-top: 1rem;
+  margin-bottom: 0;
 }

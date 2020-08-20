@@ -46,7 +46,7 @@ const Month = ({
   return (
     <div className="div-month">
       <div className="cal-year">
-        <h4 className="h4-year" >{state.year}</h4>
+        <p className="text-year" >{state.year}</p>
       </div>
       <div className="cal-month">
         <span style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
@@ -62,13 +62,13 @@ const Month = ({
       <div className="dash-grid-headers">
         {DAY_NAMES[settings.language].map((n, k) => (
           <div key={k} className="div-week-name">
-            <h4
-              className="h4-week-name"
+            <div
+              className="text-week-name"
               onMouseEnter={() => handleMouseOver(n)}
               onMouseLeave={() => handleMouseOver(undefined)}
             >
               {state.weekDay !== n ? n[0] : n}
-            </h4>
+            </div>
           </div>
         ))}
       </div>
