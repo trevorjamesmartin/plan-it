@@ -5,7 +5,7 @@ import AuthCallback from "./components/AuthCallback"
 import Embedded from "./components/Embedded";
 
 function App() {
-  const [state, setState] = useState()
+  const [state, setState] = useState({email: "", password: "", language: "en"})
   return (
     <Switch>
       <Route path="/" exact component={() => <Dash state={state} setState={setState} />} />

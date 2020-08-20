@@ -1,31 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import Login from "./Login";
-import { verifiedUser } from "./AuthCallback";
+// import { verifiedUser } from "./AuthCallback";
 import Calendar from "./Calendar"; // display
-import { getEvent, getEvents, setEvent } from "./calendarIO"; // io
+import { getEvent, getEvents, setEvent, calendarData } from "./calendarIO"; // io
 
 import "./Calendar/style.css";
 // import {userBase} from "./Calendar/config"
 
-function removeKey(keyname, state) {
-  const value = state[keyname];
-  const remKey = Object.keys(state).filter((v) => v !== keyname);
-  const nextState = {};
-  remKey.forEach((key) => (nextState[key] = state[key]));
-  return [value, nextState];
-}
-
-const Dash = ({ state: appState, setState: setAppState }) => {
-  const [state, setState] = useState({
-    email: "",
-    password: "",
-    toggle: verifiedUser(appState),
-    language: "en"
+const Dash = ({ state, setState }) => {
+  const data = calendarData;
+  useEffect(() => {
+    console.log(data ? 1:0)
+    // const data = { ...calendarData };
+    // setState({ ...state, data });
   });
   const updateToken = (e) => {
     e.preventDefault();
     setState({ ...state, [e.target.name]: e.target.value });
   };
+  function removeKey(keyname, state) {
+    const value = state[keyname];
+    const remKey = Object.keys(state).filter((v) => v !== keyname);
+    const nextState = {};
+    remKey.forEach((key) => (nextState[key] = state[key]));
+    return [value, nextState];
+  }
   const loginUser = () => {
     // verify user, then close login window & delete password.
     const [, nxt] = removeKey("password", { ...state, toggle: true });
@@ -36,7 +35,11 @@ const Dash = ({ state: appState, setState: setAppState }) => {
   return (
     <div className="div-dash">
       <br />
-      <Calendar className="calendar-component" state={state} functions={{ getEvents, getEvent, setEvent }} />
+      <Calendar
+        className="calendar-component"
+        state={state}
+        functions={{ getEvents, getEvent, setEvent }}
+      />
       <Login
         email={state.email}
         password={state.password}

@@ -1,7 +1,18 @@
 import { MONTH_NAMES } from "./config";
 
+export const dtAdjust = {
+  addDays: function(days, dt) {
+    const dt2 = new Date(dt.valueOf() + (days * 86400000));
+    return dt2
+  },
+  subDays: function(days, dt) {
+    const dt2 = new Date(dt.valueOf() - (days * 86400000));
+    return dt2
+  }
+}
+
 function genCal({language, startMonth, startYear}) {
-  const nDays = (n) => n * 86400000;
+  // const nDays = (n) => n * 86400000;
   const days = [];
   
   // determine month & year
@@ -14,19 +25,19 @@ function genCal({language, startMonth, startYear}) {
   const firstDay = zero.getDay(); // day of week
   const nextMonth = new Date(`${MONTH_NAMES[language][mm === 11 ? 0 : mm + 1]} 1, ${year}`);
   // console.log('next Month', nextMonth.getMonth())
-  const lastDay = new Date(nextMonth.valueOf() - nDays(1));
+  const lastDay = dtAdjust.subDays(1, nextMonth)  //new Date(nextMonth.valueOf() - nDays(1));
 
-  // last month ?
+  // last month
   const lastMonthName = MONTH_NAMES[language][mm === 0 ? 11 : mm - 1];
   for (let i = firstDay + 1; i > 1; i--) {
-    const ndt = new Date(zero.valueOf() - nDays(i));
+    const ndt = dtAdjust.subDays(i, zero)  //new Date(zero.valueOf() - nDays(i));
     // console.log(ndt)
     days.push({ n: ndt.getDate(), month: lastMonthName, day: (ndt.getDay() + 1) % 7});
   }
 
   // this month.
   for (let i = 0; i < lastDay.getDate(); i++) {
-    const ndt = new Date(zero.valueOf() + nDays(i));
+    const ndt = dtAdjust.addDays(i, zero)  // new Date(zero.valueOf() + nDays(i));
     days.push({ month, n: i,  day: ndt.getDay()  });
   }
   // next month ?
@@ -36,7 +47,7 @@ function genCal({language, startMonth, startYear}) {
     ];
   const daysLeft = 42 - days.length;
   for (let i= 0; i < daysLeft; i++){
-    const ndt = new Date(nextMonth.valueOf() + nDays(i));
+    const ndt = dtAdjust.addDays(i, nextMonth)  //new Date(nextMonth.valueOf() + nDays(i));
     days.push({month: nextMonthName, n: i, day: ndt.getDay() })
   }
 
