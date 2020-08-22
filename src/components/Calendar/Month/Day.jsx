@@ -20,7 +20,7 @@ const Day = ({ n, month, other, today, toggle, toggleNameView, ...props }) => {
       name={n}
       month={month}
     >
-      <p className="p-day-number">{today ? `${n}*` : n}</p>
+      <p className={other ? "p-day-other": "p-day"}>{today ? `${n}*` : n}</p>
     </div>
   );
 };

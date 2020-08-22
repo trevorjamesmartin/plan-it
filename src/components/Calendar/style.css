@@ -45,14 +45,14 @@
   /* height: 2.2ch; */
   color: #fdcb9e;
   text-align: center;
-  
 }
 
 .text-week-name {
   font-family: 'Open Sans', sans-serif;
   font-weight: 100;
   font-size: .77rem;
-  margin-bottom: 1ch;
+  margin-bottom: 2ch;
+  margin-top: 2ch;
 }
 .div-day {
   background-color: snow;
@@ -62,19 +62,27 @@
   height: 9vw;
 }
 .div-day-other {
-  background-color: snow;
-  border: 1px solid snow;
+  /* background-color: #1b262c; */
+  background-color: #233036;
+  border: 1px solid #233036;
+  color: #fdcb9e;
+  /* border: 1px solid darkslategrey; */
   padding: 1ch;
   width: 9vw;
   height: 9vw;
-  opacity: 80%;
   cursor: pointer;
 }
 
-.p-day-number {
+.p-day {
   margin: -1ch -.5ch;
   padding: 0;
 }
+
+.p-day-other {
+    margin: -1ch -.5ch;
+    padding: 0;
+}
+
 .div-day-hover {
   background-color: #00b7c2;
   border: 1px solid #00b7c2;
