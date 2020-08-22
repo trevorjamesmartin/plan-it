@@ -6,7 +6,7 @@ import "./Calendar/style.css";
 export default function({settings}) {
   return (
     <div className="calendar-frame">
-      <Calendar className="calendar-component" functions={{ getEvents, getEvent, setEvent }} />
+      <Calendar className="calendar-component" settings={settings} functions={{ getEvents, getEvent, setEvent }} />
     </div>
   )
 }

@@ -11,7 +11,7 @@ function App() {
     <Switch>
       <Route path="/" exact component={() => <Dash state={state} setState={setState} />} />
       <Route path="/oauth2-callback" component={() => <AuthCallback setValue={setState} />} />
-      <Route path="/embed" exact component={() => <Embedded/>} />
+      <Route path="/embed" exact component={() => <Embedded settings={state} />} />
     </Switch>
   );
 }
