@@ -22,7 +22,6 @@ const Calendar = ({ settings, functions, month, year }) => {
     }
   };
   return (
-    <>
       <div className="div-calendar">
         <Month
           pageLast={pageLast}
@@ -33,7 +32,6 @@ const Calendar = ({ settings, functions, month, year }) => {
           functions={functions}
         />
       </div>
-    </>
   );
 };
 
