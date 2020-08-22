@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Month from "./Month";
 
-const Calendar = ({ state: settings, functions }) => {
-  const [state, setState] = useState({
-    year: undefined,
-    month: undefined
-  });
+const Calendar = ({ settings, functions, month, year }) => {
+  const [state, setState] = useState({ year, month });
   useEffect(() => {
     const dt = new Date(Date.now());
-    setState({ year: dt.getFullYear(), month: dt.getMonth() });
-  }, []);
+    setState({ year: year || dt.getFullYear(), month: month || dt.getMonth() });
+  }, [year, month]);
   const pageLast = () => {
     if (state.month === 0) {
       setState({ year: state.year - 1, month: 11 });
@@ -30,7 +27,7 @@ const Calendar = ({ state: settings, functions }) => {
         <Month
           pageLast={pageLast}
           pageNext={pageNext}
-          settings={settings}
+          settings={ settings || { language: "en" }}
           startMonth={state.month}
           startYear={state.year}
           functions={functions}

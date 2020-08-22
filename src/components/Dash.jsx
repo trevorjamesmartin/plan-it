@@ -4,7 +4,6 @@ import React, { useEffect } from "react";
 import Calendar from "./Calendar"; // display
 import { getEvent, getEvents, setEvent, calendarData } from "./calendarIO"; // io
 
-import "./Calendar/style.css";
 // import {userBase} from "./Calendar/config"
 
 const Dash = ({ state, setState }) => {
@@ -14,6 +13,9 @@ const Dash = ({ state, setState }) => {
     // const data = { ...calendarData };
     // setState({ ...state, data });
   });
+  const updateSettings = upd => {
+    setState({...state, ...upd })
+  }
   // const updateToken = (e) => {
   //   e.preventDefault();
   //   setState({ ...state, [e.target.name]: e.target.value });
@@ -37,7 +39,8 @@ const Dash = ({ state, setState }) => {
       <br />
       <Calendar
         className="calendar-component"
-        state={state}
+        settings={state}
+        updateSettings={updateSettings}
         functions={{ getEvents, getEvent, setEvent }}
       />
       {/* <Login

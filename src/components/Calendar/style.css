@@ -20,7 +20,7 @@
   height: 100vh;
 }
 
-.dash-grid-container {
+.days-grid-container {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(4, 1fr);
@@ -28,7 +28,7 @@
   grid-template-areas: ". . . . . . ." ". . . . . . ." ". . . . . . ." ". . . . . . .";
   margin-bottom: 1rem
 }
-.dash-grid-headers {
+.days-grid-headers {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: 1fr;
@@ -68,6 +68,7 @@
   width: 9vw;
   height: 9vw;
   opacity: 80%;
+  cursor: pointer;
 }
 
 .p-day-number {
@@ -80,6 +81,7 @@
   padding: 1ch;
   width: 9vw;
   height: 9vw;
+  cursor: pointer;
 }
 
 
@@ -88,9 +90,14 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
   /* border-radius: 2px; */
 }
+
+.div-month-name {
+  width: 25ch;
+  text-align: center;
+}
+
 .day-view-header {
   display: flex;
   justify-content: space-between;
@@ -109,32 +116,41 @@
 .cal-month, .cal-day, .cal-year {
   color: #fdcb9e;
 }
+.span-cal-month {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
 .cal-year h4 {
   margin-bottom: -1ch;
 }
 
-.p-event {
+.li-event {
   padding: 1ch;
   background-color: #fdcb9e;
   color: #1b262c;
   border: 1px solid #fdcb9e;
+  margin: 3px;
+  cursor: pointer;
 }
 
-.p-event-hover {
+.li-event-hover {
   padding: 1ch;
   background-color: #fdcb9e;
   color: #1b262c;
   border: 1px solid #1b262c;
+  margin: 3px;
+  cursor: pointer;
 }
 
 .btn-month {
   color: #fdcb9e;
   background-color: #1b262c;
   box-shadow: none;
-  border: 1px solid #1b262c;
-  border-radius: 5px;
+  border: none;
   padding: 2ch;
+  cursor: pointer;
 }
 
 .h1-month {
@@ -150,3 +166,17 @@
   margin-top: 1rem;
   margin-bottom: 0;
 }
+
+.event-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.event-form input,button {
+  padding: 1ch;
+  margin: .25rem;
+  text-align: center;
+}
+

@@ -1,29 +1,4 @@
 import React, { useState, useEffect } from "react";
-import ReactDom from "react-dom";
-import { OVERLAY_STYLES_2, MODAL_STYLES_2 } from "./config";
-
-export const DayView = ({ year, month, day, weekday, open, close, ...props }) => {
-  if (!open) return null;
-
-  return ReactDom.createPortal(
-    <>
-      <div style={OVERLAY_STYLES_2} />
-      <div className="day-view" style={MODAL_STYLES_2}>
-        <div className="day-view-header">
-          <p>
-            {weekday} {month} {day}, {year}
-          </p>
-          <button onClick={close}>X</button>
-        </div>
-        <br />
-        <div className="day-view-body">
-          {props.children}
-        </div>
-      </div>
-    </>,
-    document.getElementById("portal")
-  );
-};
 
 const Day = ({ n, month, other, today, toggle, toggleNameView, ...props }) => {
   const [cls, setCls] = useState(other ? "div-day-other" : "div-day");

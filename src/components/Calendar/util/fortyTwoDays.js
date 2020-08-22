@@ -8,10 +8,34 @@ export const dtAdjust = {
   subDays: function(days, dt) {
     const dt2 = new Date(dt.valueOf() - (days * 86400000));
     return dt2
-  }
+  },
+  addHours: function(hours, dt) {
+    const dt2 = new Date(dt.valueOf() + (hours * 3600000));
+    return dt2
+  },
+  subHours: function(hours, dt) {
+    const dt2 = new Date(dt.valueOf() - (hours * 3600000));
+    return dt2
+  },
+  addMinutes: function(mins, dt) {
+    const dt2 = new Date(dt.valueOf() + (mins * 60000));
+    return dt2
+  },
+  subMinutes: function(mins, dt) {
+    const dt2 = new Date(dt.valueOf() - (mins * 60000));
+    return dt2
+  },
+  addSeconds: function(mins, dt) {
+    const dt2 = new Date(dt.valueOf() + (mins * 1000));
+    return dt2
+  },
+  subSeconds: function(mins, dt) {
+    const dt2 = new Date(dt.valueOf() - (mins * 1000));
+    return dt2
+  },
 }
 
-function genCal({language, startMonth, startYear}) {
+function fortyTwoDays({language, startMonth, startYear}) {
   // const nDays = (n) => n * 86400000;
   const days = [];
   
@@ -56,4 +80,4 @@ function genCal({language, startMonth, startYear}) {
 }
 
 
-export default genCal;
+export default fortyTwoDays;

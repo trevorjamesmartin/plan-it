@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router-dom";
 import Dash from "./components/Dash";
 import AuthCallback from "./components/AuthCallback"
 import Embedded from "./components/Embedded";
+import "./components/Calendar/style.css";
 
 function App() {
   const [state, setState] = useState({email: "", password: "", language: "en"})

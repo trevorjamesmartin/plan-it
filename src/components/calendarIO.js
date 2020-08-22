@@ -1,19 +1,18 @@
-import eventObject from "./Calendar/event.json";
+import eventObject from "./Calendar/util/event.json";
 // structure based on https://developers.google.com/calendar/v3/reference/events
-import { dtAdjust } from "./Calendar/genCal";
+// import { dtAdjust } from "./Calendar/genCal";
 
 // generate some events to display.
 const testEvents = [
-  "09:00am - coffee & code",
-  "11:45am - sudo apt update",
-  "11:46am - sudo apt upgrade",
-  "11:47am - coffee & code"
+  "09:00 - coffee & code",
+  "11:45 - sudo apt update",
+  "11:46 - sudo apt upgrade",
+  "11:47 - coffee & code"
 ].map((text, i) => {
-  const dt0 = new Date();
-  const dt = dtAdjust.addDays(i, dt0);
+  const dt = new Date();
+  // const dt = dtAdjust.addDays(i, dt0);
   const gmtoffset = dt.toString().split(' (')[0].split(' ').pop();
   const dt_date = dt.toISOString().split("T")[0];
-  // const dt_datetime = dt.toISOString().split("T")[1].split(".")[0];
   const [start, title] = text.split(" - ");
   return {
     ...eventObject,
@@ -36,8 +35,11 @@ export const getEvent = ({ yyyy, mm, dd, hhmmss }) => {
 };
 
 export const getEvents = ({ yyyy, mm, dd }) => {
-  // return events occurring on yyyy-mm-dd
-  return testEvents;
+  const dt = new Date(`${yyyy}-${mm}-${dd}`);
+  const dateString = dt.toJSON().split('T')[0];
+  const evToday = testEvents.filter(ev=> ev.start.date === dateString)
+  console.log(`calendarIO - getEvents for ${dateString}`)
+  return evToday;
 };
 
 export const setEvent = ({ event, key: { yyyy, mm, dd, hhmmss } }) => {
