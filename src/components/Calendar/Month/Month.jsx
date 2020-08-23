@@ -8,6 +8,7 @@ import PageHeader from "./PageHeader"
 import Days from "./Days";
 import fortyTwoDays from "../util/fortyTwoDays";
 import { DAY_NAMES, MONTH_NAMES, defaultMonthState } from "../util/config";
+import eventObject from "../util/event.json"
 
 const Month = ({
   pageLast,
@@ -47,18 +48,33 @@ const Month = ({
   };
 
   const handleSubmitEvent = (ev) => {
-    console.log("save the event", ev);
-    setEvForm(undefined);
+    console.log("save the event");
+    setEvForm(undefined); // clear the form
+    const [yyyy, mm, dd] = ev.start.date.split('-');
+    const hhmmss = ev.start.datetime
+    functions.setEvent({ event:ev, key: { yyyy, mm, dd, hhmmss } })
+    state.events.push(ev); // TODO: connect to storage
   };
+
+  const handleDeleteEvent = (ev) => {
+    console.log('deleting')
+    const upd = state.events.filter(i => i !== ev)
+    setState({...state, events: [...upd] })
+  }
   const handleCloseDay = () => {
     console.log("close the day");
-    setState({ ...state, selectDay: undefined }); // close the day
+    setState({ ...state, selectDay: undefined, events: [] }); // close the day
     setEvForm(undefined); // close the form
   };
   const eventListHandlers = {
     handleMouseEnter: (evName) => setEvState({ highlight: evName }),
     handleMouseLeave: () => setEvState({ highlight: undefined }),
-    handleEventClick: (ev) => setEvForm(ev)
+    handleEventClick: (ev) => setEvForm(ev),
+    handleAddEvent: (ymd) => setEvForm(
+      {...eventObject, 
+        start: {...eventObject.start, date: ymd},
+        created: Date.now()
+      })
   };
   const monthProps = {
     state,
@@ -90,7 +106,7 @@ const Month = ({
       <Days {...monthProps} />
       <DayView {...dayViewProps}>
         {evForm ? (
-          <EventForm ev={evForm} handleSubmit={handleSubmitEvent} />
+          <EventForm ev={evForm} handleSubmit={handleSubmitEvent} handleDelete={handleDeleteEvent} />          
         ) : state.selectDay ? (
           <EventList {...{ state, settings, evState }} handlers={eventListHandlers} />
         ) : (

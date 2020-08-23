@@ -3,13 +3,18 @@ import Event from "./Event";
 import {MONTH_NAMES} from "../util/config"
 
 const EventList = ({state, settings, evState, handlers}) => {
-  const { handleMouseEnter, handleMouseLeave, handleEventClick} = handlers;
+  const { handleMouseEnter, handleMouseLeave, handleEventClick, handleAddEvent} = handlers;
+  const ymd = `${state.year}-${MONTH_NAMES[settings.language].indexOf(state.selectMonth) + 1}-${state.selectDay}`;
+  const addEvent = () => {
+    handleAddEvent(ymd)
+  }
   return (
     <>
       <p>
         list of events for {state.selectMonth}-{state.selectDay}-
         {state.year}...
       </p>
+      <span><button id="add-event" alt="add event" onClick={addEvent}>+</button></span>
       <ul>
         {state.events.map((ev, idx) => {
           const key = JSON.stringify({
@@ -32,5 +37,5 @@ const EventList = ({state, settings, evState, handlers}) => {
             </ul>
       </>)
 }
- 
+
 export default EventList;

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import eventObject from "../util/event.json";
 
-const EventForm = ({ ev, handleSubmit }) => {
+const EventForm = ({ ev, handleSubmit, handleDelete }) => {
   const [calEvent, setCalEvent] = useState({ ...eventObject, ...ev });
   const [dt, setDt] = useState({ start: ev.start.datetime, dt: Date(ev.start.date), duration: 15 });
   const handleFormData = (e) => {
@@ -15,18 +15,23 @@ const EventForm = ({ ev, handleSubmit }) => {
   }
   const handleFormSubmit = (e) => {
     e.preventDefault();
-    const start = { ...calEvent.start };
-    start.datetime = dt.start;
-
-    const updated = { ...calEvent, start };
-    handleSubmit(updated); // updated event.
-    // console.log(calEvent);
+    if (dt.action === 'delete'){
+      console.log('delete');
+      handleDelete(calEvent)
+      return
+    }
+    console.log('check start time')
+    if (dt.start === 'datetime') return // require a starting time
+    console.log('check summary')
+    if (calEvent.summary === "") return // require a description
+    handleSubmit({ ...calEvent, start: { ...calEvent.start, datetime: dt.start }}); // updated event.
   };
   const handleDuration = e => {
     e.preventDefault();
     setDt({...dt, duration: e.target.value});
   }
   return (
+    <>
     <form className="event-form" onSubmit={handleFormSubmit}>
       <label htmlFor="start">start:</label>
       <input
@@ -50,8 +55,10 @@ const EventForm = ({ ev, handleSubmit }) => {
         value={calEvent.summary}
         onChange={handleFormData}
       />
-      <button>save</button>
+      <button id="save" name="save" onClick={() => setDt({...dt, action: 'save'})}>save</button>
+      <button id="delete" name="delete" onClick={() => setDt({...dt, action: 'delete'})}>delete</button>
     </form>
+    </>
   );
 };
 

@@ -31,20 +31,25 @@ export const calendarData = { calendarEvents: [...testEvents] };
 
 export const getEvent = ({ yyyy, mm, dd, hhmmss }) => {
   // calendar will call getEvent to display details
-  return "details";
+  const dt = new Date(`${yyyy}-${mm}-${dd}`);
+  const dateString = dt.toJSON().split('T')[0];
+  const ev = calendarData.calendarEvents.filter(ev=> ev.start.date === dateString && ev.start.datetime === hhmmss)
+  return ev;
 };
 
 export const getEvents = ({ yyyy, mm, dd }) => {
   const dt = new Date(`${yyyy}-${mm}-${dd}`);
   const dateString = dt.toJSON().split('T')[0];
-  const evToday = testEvents.filter(ev=> ev.start.date === dateString)
+  const evToday = calendarData.calendarEvents.filter(ev=> ev.start.date === dateString)
   console.log(`calendarIO - getEvents for ${dateString}`)
   return evToday;
 };
 
 export const setEvent = ({ event, key: { yyyy, mm, dd, hhmmss } }) => {
   // details are displayed in "day-view-body" classa
+  console.log('set event', [yyyy, mm, dd])
+  // const old = getEvent({ yyyy, mm, dd, hhmmss });
+  calendarData.calendarEvents.push(event)
   return "ok";
 };
 
-export const createEvent = (details) => ({ ...eventObject, ...details });
